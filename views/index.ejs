@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Search - Test Pexel App</title>
+  <meta charset="utf-8">
+  <meta http-equiv="content-type" content="text/html;charset=utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <link rel="manifest" href='manifest.json'>
+  <link rel="apple-touch-icon" href=''>
+  <link rel="apple-mobile-web-app-status-bar" content='#000000'>
+  
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.0"></script>
+  <style>
+    body{
+      background:url("<%= data.photos[0].src.medium%>");
+      background-position: center;
+      background-size: cover;
+      background-repeat: no-repeat;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app" class='h-100'>
+      <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+          <!-- Brand/logo -->
+          <h1><a class="navbar-brand" href="/"><img src="/images/icons/icon.svg">Test-Pexel</a></h1>
+      </nav>
+    <div class="vertical-center w-100">
+      <div class="container-fluid mx-auto">
+        <form>
+          <div class="form-group">
+            <input type="text" class="form-control round" placeholder="Type in your search" v-model='searchQuery'>
+          </div>
+        </form>
+        <button @click='search' class="btn btn-primary">Search</button>
+      </div>
+    </div>
+  </div>
+
+</body>
+<script src="javascripts/app.js"></script>
+
+</html>
