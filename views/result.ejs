@@ -20,105 +20,107 @@
 
 
     <div id="app">
-        <div id="div">
+        <div class="container-fluid" id='img-loader'></div>
+        <div class="container" id='img-container'>
+            <div class="row mx-auto">
+                <div>
+                    <button @click='close' class="btn btn-primary float-right mx-2 my-2">&times;</button>
+                    <div class="clearfix"></div>
+                    <div class="card px-2 py-2">
 
-            <div class="container-fluid" id='img-loader'></div>
-            <div class="container" id='img-container'>
-                <div class="row mx-auto">
-                    <div>
-                        <button @click='close' class="btn btn-primary float-right mx-2 my-2">&times;</button>
-                        <div class="clearfix"></div>
-                        <div class="card px-2 py-2">
-
-                            <img class="img-fluid" :src="this.src" alt="...">
-                            <div class="card-body px-0">
-                                <h6 id='meta' class="card-title">Photographer: {{this.meta}}</h6>
-                                <a id='btn' class="border border-primary bg-primary text-white px-2 py-2"
-                                    :href="this.src" download>Download</a>
-                            </div>
+                        <img class="img-fluid" :src="this.src" alt="...">
+                        <div class="card-body px-0">
+                            <h6 id='meta' class="card-title">Photographer: {{this.meta}}</h6>
+                            <a id='btn' class="border border-primary bg-primary text-white px-2 py-2" :href="this.src"
+                                download>Download</a>
                         </div>
                     </div>
                 </div>
-
-
             </div>
-            <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-                <!-- Brand/logo -->
-                <h1><a class="navbar-brand" href="/"><img src="/images/icons/icon.svg">Test-Pexel</a></h1>
 
-                <!-- Links -->
-                <ul class="navbar-nav float-right">
-                    <li class="nav-item">
-                        <a class="nav-link" href="/">Search</a>
-                    </li>
-                </ul>
-            </nav>
 
-            <div v-if='this.res.length > 1' class="container-fluid mt-3">
-                <h2 class="font-weight-bold"><%= search %></h2>
-                <p><i>Page <%= page%></i></p>
-                <div class="row">
-                    <%for(var obj of data.photos){ %>
-                    <div class="col-lg-6 col-md-6 col-sm-12 py-2 px-2">
-                        <div class="card px-2 py-2">
-                            <img @click='load("<%= obj.src.medium %>", "<%= obj.photographer%>")'
-                                class="card-img-top img" src="<%= obj.src.medium %>" alt="Card image">
-                            <div class="card-body px-0">
-                                <h6 class="card-title">Photographer:<i><%= obj.photographer%></i></h6>
-                            </div>
+        </div>
+        <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+            <!-- Brand/logo -->
+            <h1><a class="navbar-brand" href="/"><img src="/images/icons/icon.svg">Test-Pexel</a></h1>
+
+            <!-- Links -->
+            <ul class="navbar-nav float-right">
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Search</a>
+                </li>
+            </ul>
+        </nav>
+
+        <div v-if='this.res.length > 1' class="container-fluid mt-3">
+            <h2 class="font-weight-bold"><%= search %></h2>
+            <p><i>Page <%= page%></i></p>
+            <div class="row">
+                <%for(var obj of data.photos){ %>
+                <div class="col-lg-6 col-md-6 col-sm-12 py-2 px-2">
+                    <div class="card px-2 py-2">
+                        <img id='img' @click='load("<%= obj.src.medium %>", "<%= obj.photographer%>")' class="card-img-top img"
+                            src="<%= obj.src.medium %>" alt="...">
+                        <div class="card-body px-0">
+                            <h6 class="card-title">Photographer:<i><%= obj.photographer%></i></h6>
                         </div>
                     </div>
-                    <% }%>
                 </div>
-                <div class="container-fluid">
-                    <button v-if='this.page == 1' class="btn btn-primary float-left mt-3 mb-3" disabled>&#171; Prev
-                    </button>
-                    <button @click='prev' class="btn btn-primary float-left mt-3 mb-3" v-else>&#171; Prev </button>
-                    <button @click='next' class="btn btn-primary float-right mt-3 mb-3">Next &#187;</button>
-                </div>
+                <% }%>
             </div>
-            <div v-else class="container-fluid">
-                <h1>No results found!</h1>
-                <a href="/">Go back to search page</a>
+            <div class="container-fluid">
+                <button v-if='this.page == 1' class="btn btn-primary float-left mt-3 mb-3" disabled>&#171; Prev
+                </button>
+                <button @click='prev' class="btn btn-primary float-left mt-3 mb-3" v-else>&#171; Prev </button>
+                <button @click='next' class="btn btn-primary float-right mt-3 mb-3">Next &#187;</button>
             </div>
         </div>
+        <div v-else class="container-fluid">
+            <h1>No results found!</h1>
+            <a href="/">Go back to search page</a>
+        </div>
+
     </div>
 </body>
+<script src="/javascripts/main.js"></script>
 <script type='text/javascript'>
-    const vm = new Vue({
-        el: '#app',
-        data: {
-            page: "<%= page%>",
-            search: "<%= search%>",
-            res: "<%= data.photos%>",
-            meta: "",
-            src: ""
-        },
-        methods: {
-            next() {
-                var num = parseInt(this.page) + 1;
-                var page = num.toString();
-                location.href = `/results/${this.search}/${page}`;
+    document.addEventListener('DOMContentLoaded', ()=>{
+        document.getElementById('img').addEventListener('click', ()=>{
+            document.getElementById('app').style.overflow = 'hidden';
+        })
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                page: "<%= page%>",
+                search: "<%= search%>",
+                res: "<%= data.photos%>",
+                meta: "",
+                src: ""
             },
-            prev() {
-                var num = parseInt(this.page) - 1;
-                var page = num.toString();
-                location.href = `/results/${this.search}/${page}`;
-            },
-            load(src, meta) {
-                this.src = src;
-                this.meta = meta;
-                document.getElementById('img-loader').style.display = 'block';
-                document.getElementById('img-container').style.display = 'flex';
-                document.geElementById('div').style.overflow = 'hidden';
-            },
-            close() {
-                document.getElementById('img-loader').style.display = 'none';
-                document.getElementById('img-container').style.display = 'none';
-                document.geElementById('div').style.overflow = 'scroll';
+            methods: {
+                next() {
+                    var num = parseInt(this.page) + 1;
+                    var page = num.toString();
+                    location.href = `/results/${this.search}/${page}`;
+                },
+                prev() {
+                    var num = parseInt(this.page) - 1;
+                    var page = num.toString();
+                    location.href = `/results/${this.search}/${page}`;
+                },
+                load(src, meta) {
+                    this.src = src;
+                    this.meta = meta;
+                    document.getElementById('img-loader').style.display = 'block';
+                    document.getElementById('img-container').style.display = 'flex';
+                },
+                close() {
+                    document.getElementById('img-loader').style.display = 'none';
+                    document.getElementById('img-container').style.display = 'none';
+                }
             }
-        }
-    });
+        });
+    })
 
 </script>
 

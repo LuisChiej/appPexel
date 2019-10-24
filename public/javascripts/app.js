@@ -9,10 +9,10 @@ document.addEventListener('DOMContentLoaded', ()=>{
         methods: {
             search(e) {
                 e.preventDefault();
-                if(this.searchQuery !== ''){
+                if(this.searchQuery.trim() !== ''){
                     location.href = `/results/${this.searchQuery}/1`;
                 } else {
-                    alert('Hello');
+                    alert('Please type in your search');
                 }
             }
         }
