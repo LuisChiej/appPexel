@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
   <title>Search - Test Pexel App</title>
@@ -12,7 +12,8 @@
   <link href="https://fonts.googleapis.com/css?family=Poppins:400,800" rel="stylesheet" />
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
   <link rel="manifest" href='manifest.json'>
-  <link rel="apple-touch-icon" href=''>
+  <meta name="theme-color" content="#000000">
+  <link rel="apple-touch-icon" href='/images/icons/icon-128.png'>
   <link rel="apple-mobile-web-app-status-bar" content='#000000'>
 
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
@@ -29,7 +30,7 @@
   <div id="app" class='h-100'>
     <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
       <!-- Brand/logo -->
-      <h1><a class="navbar-brand" href="/"><img src="/images/icons/icon.svg">Test-Pexel</a></h1>
+      <h1><a class="navbar-brand" href="/"><img src="/images/icons/icon.svg" alt="...">Test-Pexel</a></h1>
     </nav>
     <div class="s004">
       <form>
@@ -37,6 +38,7 @@
           <legend>WHAT PICTURES DO YOU SEEK?</legend>
           <div class="inner-form">
             <div class="input-field">
+              <label for="..." class="d-none"></label>
               <input class="form-control w-100" type="text" placeholder="Type to search..." v-model='searchQuery' />
               <button @click='search' class="btn-search" type="button">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
@@ -47,7 +49,6 @@
               </button>
             </div>
           </div>
-
         </fieldset>
       </form>
     </div>

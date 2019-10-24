@@ -12,7 +12,8 @@ document.addEventListener('DOMContentLoaded', ()=>{
                 if(this.searchQuery.trim() !== ''){
                     location.href = `/results/${this.searchQuery}/1`;
                 } else {
-                    alert('Please type in your search');
+                    alert('Please type in a search query');
+                    this.searchQuery = "";
                 }
             }
         }
