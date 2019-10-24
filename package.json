@@ -4,7 +4,7 @@
   "private": true,
   "mode": "development",
   "scripts": {
-    "start": "nodemon ./bin/www",
+    "start": "nodet ./bin/www",
     "build": "webpack --config webpack.config.js"
   },
   "dependencies": {
@@ -20,6 +20,6 @@
     "webpack-cli": "^3.3.9"
   },
   "engines": {
-    "node": "10.x"
+    "node": "10.16.3"
   }
 }
