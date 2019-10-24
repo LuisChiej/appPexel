@@ -4,7 +4,7 @@
   "private": true,
   "mode": "development",
   "scripts": {
-    "start": "nodet ./bin/www",
+    "start": "node ./bin/www",
     "build": "webpack --config webpack.config.js"
   },
   "dependencies": {
